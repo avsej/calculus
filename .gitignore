@@ -1,0 +1,10 @@
+*.bundle
+*.gem
+*.o
+*.so
+.bundle
+Gemfile.lock
+ext/**/Makefile
+ext/**/mkmf.log
+pkg/*
+tmp/*
