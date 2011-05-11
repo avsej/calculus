@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email       = ["sergey.avseyev@gmail.com"]
   s.homepage    = "http://avsej.net/calculus"
   s.summary     = %q{A ruby parser for TeX equations}
-  s.description = %q{A ruby parser for TeX equations. Can render images for them and build abstract syntax tree (AST) for subsequent evaluation.}
+  s.description = %q{A ruby parser for TeX equations. It parses equations to postfix (reverse polish) notation and can build abstract syntax tree (AST). Also it can render images via latex.}
 
   s.rubyforge_project = "calculus"
 
