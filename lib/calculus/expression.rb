@@ -1,17 +1,20 @@
+require 'digest/sha1'
+
 module Calculus
 
   class Expression
+    include Latex
+
+    attr_reader :sha1
+    attr_reader :source
 
     attr_reader :postfix_notation
     alias :rpn :postfix_notation
 
-    attr_reader :abstract_syntax_tree
-    alias :ast :abstract_syntax_tree
-
-    def initialize(input)
-      @postfix_notation = Parser.new(input).parse
-      @abstract_syntax_tree = convert_to_abstract_syntax_tree
+    def initialize(source)
+      @postfix_notation = Parser.new(@source = source).parse
       @variables = extract_variables
+      update_sha1
     end
 
     def variables
@@ -30,6 +33,7 @@ module Calculus
     def []=(name, value)
       raise ArgumentError, "No such variable defined: #{name}" unless @variables.keys.include?(name)
       @variables[name] = value
+      update_sha1
     end
 
     def traverse(&block)
@@ -89,11 +93,10 @@ module Calculus
       @postfix_notation.select{|node| node.kind_of? String}.inject({}){|h, v| h[v] = nil; h}
     end
 
-    def convert_to_abstract_syntax_tree
-      traverse do |operation, left, right, stack|
-        [operation, left, right]
-      end
+    def update_sha1
+      @sha1 = Digest::SHA1.hexdigest([@postfix_notation, @variables].map(&:inspect).join('-'))
     end
+
   end
 
 end
