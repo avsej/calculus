@@ -34,6 +34,11 @@ You can also render expression to PNG image if you have <tt>latex</tt> and <tt>d
 
 {2 + 3 \cdot x}[http://files.avsej.net/expression.png]
 
+Also you can skip parser if you need only png generation
+ 011:0> Calculus::Expression.new("\\hat{f}(\\xi) = \\int_{-\\infty}^{\\infty} f(x)\\ e^{- 2\\pi i x \\xi}\\,dx", :parse => false).to_png
+
+{\hat{f}(\xi) = \int_{-\infty}^{\infty} f(x)\ e^{- 2\pi i x \xi}\,dx}[http://files.avsej.net/expression-without-parser.png]
+
 Don't forget to cleanup file after using.
 
 == Hacking

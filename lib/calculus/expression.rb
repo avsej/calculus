@@ -11,11 +11,17 @@ module Calculus
     attr_reader :postfix_notation
     alias :rpn :postfix_notation
 
-    def initialize(source)
-      @postfix_notation = Parser.new(@source = source).parse
+    def initialize(source, options = {})
+      options = {:parse => true}.merge(options)
+      @source = source
+      @postfix_notation = options[:parse] ? Parser.new(source).parse : []
       raise ArgumentError, "Should be no more that one equals sign" if @postfix_notation.count(:eql) > 1
       @variables = extract_variables
       update_sha1
+    end
+
+    def parsed?
+      !@postfix_notation.empty?
     end
 
     def variables

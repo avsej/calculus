@@ -96,6 +96,13 @@ class TestExpression < MiniTest::Unit::TestCase
     assert_equal "2 + 2 * 4 + x_2", expression("2 + 2 * x_1 + x_2", "x_1" => 4).to_s
   end
 
+  def test_that_it_allow_skip_parser
+    exp = Calculus::Expression.new("\\hat{f}(\\xi) = \\int_{-\\infty}^{\\infty} f(x)\\ e^{- 2\\pi i x \\xi}\\,dx", :parse => false)
+    refute exp.parsed?
+    assert_equal [], exp.postfix_notation
+    assert_equal Hash.new, exp.instance_variable_get("@variables")
+  end
+
   protected
 
   def expression(input, substitutions = {})
