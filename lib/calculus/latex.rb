@@ -13,7 +13,7 @@ module Calculus
       \\end{document}
     EOT
 
-    def to_png(density = 700)
+    def to_png(background = 'White', density = 700)
       raise CommandNotFoundError, "Required commands missing: #{missing_commands.join(', ')} in PATH. (#{ENV['PATH']})" unless missing_commands.empty?
 
       temp_path = Dir.mktmpdir
@@ -21,7 +21,7 @@ module Calculus
         File.open("#{sha1}.tex", 'w') do |f|
           f.write(TEMPLATE.sub('#', self.to_s))
         end
-        `latex -interaction=nonstopmode #{sha1}.tex && dvipng -q -T tight -bg White -D #{density.to_i} -o #{sha1}.png #{sha1}.dvi`
+        `latex -interaction=nonstopmode #{sha1}.tex && dvipng -q -T tight -bg #{background} -D #{density.to_i} -o #{sha1}.png #{sha1}.dvi`
       end
       return File.join(temp_path, "#{sha1}.png") if $?.exitstatus.zero?
     ensure
