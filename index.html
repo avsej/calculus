@@ -24,7 +24,7 @@
     a { color: #000000; }
     .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
     .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
+    pre { background: #000; color: #fff; padding: 15px;overflow: auto;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
   </style>
@@ -35,42 +35,80 @@
 
   <div id="container">
 
-    <div class="download">
-      <a href="http://github.com/avsej/calculus/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/avsej/calculus/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
+      <div class="download">
+          <a href="http://github.com/avsej/calculus/zipball/master">
+              <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
+          <a href="http://github.com/avsej/calculus/tarball/master">
+              <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+      </div>
 
-    <h1><a href="http://github.com/avsej/calculus">calculus</a>
-      <span class="small">by <a href="http://github.com/avsej">avsej</a></span></h1>
+      <h1><a href="http://github.com/avsej/calculus">calculus</a>
+          <span class="small">by <a href="http://github.com/avsej">avsej</a></span></h1>
 
-    <div class="description">
-      A ruby parser for TeX equations
-    </div>
+      <div class="description">
+          A ruby parser for TeX equations
+      </div>
 
-    <p>It parses equations to postfix (reverse polish) notation and can build abstract syntax tree (AST). Also it can render images via latex.</p><h2>Install</h2>
-<p>gem install calculus</p>
-<h2>Authors</h2>
-<p>Sergey Avseyev (sergey.avseyev@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Sergey Avseyev (sergey.avseyev@gmail.com)<br/>      </p>
+      <p>
+      Calculus is utility library which allow to parse some subset of latex equations and store them in <a href="http://en.wikipedia.org/wiki/Reverse_Polish_notation">postfix notation</a> It also allows translate it to <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">abstract syntax tree</a> and calculate (implemented for simple expressions).
+      </p>
 
+      <h2>Install</h2>
+      <pre> gem install calculus </pre>
 
-    <h2>Download</h2>
-    <p>
+      <h2>Examples</h2>
+<pre>
+ 001:0&gt; require 'calculus'
+ true
+ 002:0&gt; exp = Calculus::Expression.new(&quot;2 + 3 * x&quot;)
+ #&lt;Expression:f46e77a9377ed2d5a9da768496a7e1c20be51bfe postfix_notation=[2, 3, &quot;x&quot;, :mul, :plus] variables={&quot;x&quot;=&gt;nil}&gt;
+ 003:0&gt; exp.postfix_notation
+ [2, 3, &quot;x&quot;, :mul, :plus]
+ 004:0&gt; exp.abstract_syntax_tree
+ [:plus, 2, [:mul, 3, &quot;x&quot;]]
+ 005:0&gt; exp.variables
+ [&quot;x&quot;]
+ 006:0&gt; exp.unbound_variables
+ [&quot;x&quot;]
+ 007:0&gt; exp[&quot;x&quot;] = 5
+ 5
+ 008:0&gt; exp.unbound_variables
+ []
+ 009:0&gt; exp.calculate
+ 17
+</pre>
+      <p>
+      You can also render expression to PNG image if you have <tt>latex</tt> and <tt>dvipng</tt> installed.
+      </p>
+<pre>
+ 010:0&gt; Calculus::Expression.new(&quot;2 + 3 \\cdot x&quot;).to_png
+ &quot;/tmp/d20110512-16457-dhxt71/f46e77a9377ed2d5a9da768496a7e1c20be51bfe.png&quot;
+</pre>
+      <p>
+      <img src="http://files.avsej.net/expression.png" />
+      </p>
+      <p>
+      Don&#8217;t forget to cleanup file after using.
+      </p>
+
+      <h2>Hacking</h2>
+      <p>
+      Just fork and pull request.
+      </p>
+
+      <h2>Download</h2>
+      <p>
       You can download this project in either
       <a href="http://github.com/avsej/calculus/zipball/master">zip</a> or
       <a href="http://github.com/avsej/calculus/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
+      </p>
+      <p>You can also clone the project with <a href="http://git-scm.com">Git</a> by running:
       <pre>$ git clone git://github.com/avsej/calculus</pre>
-    </p>
+      </p>
 
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/avsej/calculus">avsej/calculus</a>
-    </div>
+      <div class="footer">
+        get the source code on GitHub : <a href="http://github.com/avsej/calculus">avsej/calculus</a>
+      </div>
 
   </div>
 
