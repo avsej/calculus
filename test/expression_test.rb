@@ -84,6 +84,10 @@ class TestExpression < MiniTest::Unit::TestCase
     refute_equal old_sha1, exp.sha1
   end
 
+  def test_that_it_raises_error_if_there_are_more_than_one_equals_sign
+    assert_raises(ArgumentError) { expression("2 * 3 = 2 + 2 + 2 = 6") }
+  end
+
   protected
 
   def expression(input)

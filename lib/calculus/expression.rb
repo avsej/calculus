@@ -13,6 +13,7 @@ module Calculus
 
     def initialize(source)
       @postfix_notation = Parser.new(@source = source).parse
+      raise ArgumentError, "Should be no more that one equals sign" if @postfix_notation.count(:eql) > 1
       @variables = extract_variables
       update_sha1
     end
