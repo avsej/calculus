@@ -32,12 +32,12 @@ You can also render expression to PNG image if you have <tt>latex</tt> and <tt>d
  010:0> Calculus::Expression.new("2 + 3 \\cdot x").to_png
  "/tmp/d20110512-16457-dhxt71/f46e77a9377ed2d5a9da768496a7e1c20be51bfe.png"
 
-{2 + 3 \cdot x}[http://files.avsej.net/expression.png]
+{2 + 3 \cdot x}[http://files.avsej.net/exp1.png]
 
 Also you can skip parser if you need only png generation
  011:0> Calculus::Expression.new("\\hat{f}(\\xi) = \\int_{-\\infty}^{\\infty} f(x)\\ e^{- 2\\pi i x \\xi}\\,dx", :parse => false).to_png
 
-{\hat{f}(\xi) = \int_{-\infty}^{\infty} f(x)\ e^{- 2\pi i x \xi}\,dx}[http://files.avsej.net/expression-without-parser.png]
+{\hat{f}(\xi) = \int_{-\infty}^{\infty} f(x)\ e^{- 2\pi i x \xi}\,dx}[http://files.avsej.net/exp2.png]
 
 Don't forget to cleanup file after using.
 
