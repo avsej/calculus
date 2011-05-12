@@ -85,8 +85,15 @@
  &quot;/tmp/d20110512-16457-dhxt71/f46e77a9377ed2d5a9da768496a7e1c20be51bfe.png&quot;
 </pre>
       <p>
-      <img src="http://files.avsej.net/expression.png" />
+      <img src="http://files.avsej.net/exp1.png" />
       </p>
+      <p>
+      Also you can skip parser if you need only png generation
+      </p>
+      <pre> 011:0&gt; Calculus::Expression.new("\\hat{f}(\\xi) = \\int_{-\\infty}^{\\infty} f(x)\\ e^{- 2\\pi i x \\xi}\\,dx", :parse =&gt; false).to_png
+      </pre>
+      <p>
+      <img src="http://files.avsej.net/exp2.png"></p>
       <p>
       Don&#8217;t forget to cleanup file after using.
       </p>
