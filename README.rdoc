@@ -4,33 +4,33 @@ Calculus is utility library which allow to parse some subset of latex equations 
 
 == Installation
 
-    gem install calculus
+ gem install calculus
 
 == Examples
 
-    001:0> require 'calculus'
-    true
-    002:0> exp = Calculus::Expression.new("2 + 3 * x")
-    #<Expression:f46e77a9377ed2d5a9da768496a7e1c20be51bfe postfix_notation=[2, 3, "x", :mul, :plus] variables={"x"=>nil}>
-    003:0> exp.postfix_notation
-    [2, 3, "x", :mul, :plus]
-    004:0> exp.abstract_syntax_tree
-    [:plus, 2, [:mul, 3, "x"]]
-    005:0> exp.variables
-    ["x"]
-    006:0> exp.unbound_variables
-    ["x"]
-    007:0> exp["x"] = 5
-    5
-    008:0> exp.unbound_variables
-    []
-    009:0> exp.calculate
-    17
+ 001:0> require 'calculus'
+ true
+ 002:0> exp = Calculus::Expression.new("2 + 3 * x")
+ #<Expression:f46e77a9377ed2d5a9da768496a7e1c20be51bfe postfix_notation=[2, 3, "x", :mul, :plus] variables={"x"=>nil}>
+ 003:0> exp.postfix_notation
+ [2, 3, "x", :mul, :plus]
+ 004:0> exp.abstract_syntax_tree
+ [:plus, 2, [:mul, 3, "x"]]
+ 005:0> exp.variables
+ ["x"]
+ 006:0> exp.unbound_variables
+ ["x"]
+ 007:0> exp["x"] = 5
+ 5
+ 008:0> exp.unbound_variables
+ []
+ 009:0> exp.calculate
+ 17
 
 You can also render expression to PNG image if you have <tt>latex</tt> and <tt>dvipng</tt> installed.
 
-  010:0> Calculus::Expression.new("2 + 3 \\cdot x").to_png
-  "/tmp/d20110512-16457-dhxt71/f46e77a9377ed2d5a9da768496a7e1c20be51bfe.png"
+ 010:0> Calculus::Expression.new("2 + 3 \\cdot x").to_png
+ "/tmp/d20110512-16457-dhxt71/f46e77a9377ed2d5a9da768496a7e1c20be51bfe.png"
 
 {2 + 3 \cdot x}[http://files.avsej.net/expression.png]
 
