@@ -88,10 +88,22 @@ class TestExpression < MiniTest::Unit::TestCase
     assert_raises(ArgumentError) { expression("2 * 3 = 2 + 2 + 2 = 6") }
   end
 
+  def test_it_substitutes_variables_for_string_representation
+    assert_equal "2 + 2 * 4", expression("2 + 2 * x", "x" => 4).to_s
+    assert_equal "2 + 2*4-3", expression("2 + 2*x-3", "x" => 4).to_s
+    assert_equal "\\frac{1}{3}", expression("\\frac{1}{x}", "x" => 3).to_s
+    assert_equal "2 + 2^4", expression("2 + 2^x", "x" => 4).to_s
+    assert_equal "2 + 2 * 4 + x_2", expression("2 + 2 * x_1 + x_2", "x_1" => 4).to_s
+  end
+
   protected
 
-  def expression(input)
-    Calculus::Expression.new(input)
+  def expression(input, substitutions = {})
+    exp = Calculus::Expression.new(input)
+    substitutions.keys.each do |var|
+      exp[var] = substitutions[var]
+    end
+    exp
   end
 
 end

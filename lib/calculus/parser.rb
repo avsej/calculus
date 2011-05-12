@@ -8,7 +8,7 @@ module Calculus
     def initialize(source)
       @operators = {:sqrt => 3, :exp => 3, :div => 2, :mul => 2, :plus => 1, :minus => 1, :eql => 0}
 
-      super(source)
+      super(source.dup)
     end
 
     def parse

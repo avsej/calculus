@@ -81,7 +81,14 @@ module Calculus
     alias :ast :abstract_syntax_tree
 
     def to_s
-      source
+      result = source.dup
+      (variables - unbound_variables).each do |var|
+        result.gsub!(/(\W)#{var}(\W)/, "\\1#{@variables[var]}\\2")
+        result.gsub!(/^#{var}(\W)/, "#{@variables[var]}\\1")
+        result.gsub!(/(\W)#{var}$/, "\\1#{@variables[var]}")
+        result.gsub!(/^#{var}$/, @variables[var].to_s)
+      end
+      result
     end
 
     def inspect
