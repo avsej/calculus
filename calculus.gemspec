@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email       = ["sergey.avseyev@gmail.com"]
   s.homepage    = "http://avsej.net/calculus"
   s.summary     = %q{A ruby parser for TeX equations}
-  s.description = %q{A ruby parser for TeX equations. It parses equations to postfix (reverse polish) notation and can build abstract syntax tree (AST). Also it can render images via latex. Requres modern ruby 1.9.x due to because of using advanced oniguruma regex engine}
+  s.description = %q{A ruby parser for TeX equations. It parses equations to postfix (reverse polish) notation and can build abstract syntax tree (AST). Also it can render images via latex. Requres modern ruby 1.9.x because of using advanced oniguruma regex engine}
 
   s.has_rdoc     = true
   s.rdoc_options = ['--main', 'README.rdoc']
