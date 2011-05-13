@@ -2,8 +2,13 @@ require 'tmpdir'
 
 module Calculus
 
+  # Renders expression to PNG image using <tt>latex<tt> and
+  # <tt>dvipng</tt>
   module Latex
 
+    # Basic latex template which use packages <tt>amsmath</tt> and
+    # <tt>amssymb</tt> from standard distributive and set off expression
+    # with <tt>$$</tt>.
     TEMPLATE = <<-EOT.gsub(/^\s+/, '')
       \\documentclass{article}
       \\usepackage{amsmath,amssymb}
@@ -13,6 +18,16 @@ module Calculus
       \\end{document}
     EOT
 
+    # Render image from source expression string. It is possible to pass
+    # <tt>background</tt> color (default: <tt>'White'</tt>) and
+    # <tt>density</tt> (default: <tt>700</tt>). See <tt>dvipng(1)</tt>
+    # page for details.
+    #
+    # Raises <tt>CommandNotFound</tt> exception when some tools not
+    # available.
+    #
+    # Returns path to images. *Note* that caller should take care about
+    # this file.
     def to_png(background = 'White', density = 700)
       raise CommandNotFoundError, "Required commands missing: #{missing_commands.join(', ')} in PATH. (#{ENV['PATH']})" unless missing_commands.empty?
 
@@ -29,6 +44,8 @@ module Calculus
       File.unlink("#{sha1}.dvi") if File.exists?("#{sha1}.dvi")
     end
 
+    # Check LaTeX toolchain availability and returns array of missing
+    # tools
     def missing_commands
       commands = []
       commands << "latex" unless can_run?("latex -v")
@@ -38,6 +55,7 @@ module Calculus
 
     protected
 
+    # Trial command and check if return code is zero
     def can_run?(command)
       `#{command} 2>&1`
       $?.exitstatus.zero?
