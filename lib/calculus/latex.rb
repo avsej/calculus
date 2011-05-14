@@ -2,7 +2,7 @@ require 'tmpdir'
 
 module Calculus
 
-  # Renders expression to PNG image using <tt>latex<tt> and
+  # Renders expression to PNG image using <tt>latex</tt> and
   # <tt>dvipng</tt>
   module Latex
 
