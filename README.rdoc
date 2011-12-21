@@ -2,6 +2,8 @@
 
 Calculus is utility library which allow to parse some subset of latex equations and store them in {Postfix notation}[http://en.wikipedia.org/wiki/Reverse_Polish_notation] It also allows translate it to {Abstract syntax tree}[http://en.wikipedia.org/wiki/Abstract_syntax_tree] and calculate (implemented for simple expressions).
 
+Build status: {<img src="http://travis-ci.org/avsej/calculus.png" />}[http://travis-ci.org/avsej/calculus]
+
 == Installation
 
  gem install calculus
