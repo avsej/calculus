@@ -61,6 +61,11 @@ class TestParser < MiniTest::Unit::TestCase
     assert_raises(Calculus::ParserError) { assert_equal [2, "x__2", :mul, 16, :eql], parse("2 \\cdot x__2 = 16") }
   end
 
+  def test_that_it_handles_unary_minus
+    assert_equal [2, :uminus], parse("-2")
+    assert_equal [2, :uminus, 2, :uminus, :mul], parse("-2 * -2")
+  end
+
   protected
 
   def parse(input)

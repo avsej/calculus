@@ -48,7 +48,7 @@ module Calculus
     # (native expression like <tt>2 + 3 * (4 / 3)</tt>, but also in TeX
     # style <tt>2 + 3 \cdot \frac{4}{3}.
     def initialize(source)
-      @operators = {:sqrt => 3, :exp => 3, :div => 2, :mul => 2, :plus => 1, :minus => 1, :eql => 0}
+      @operators = {:uminus => 4, :sqrt => 3, :exp => 3, :div => 2, :mul => 2, :plus => 1, :minus => 1, :eql => 0}
 
       super(source.dup)
     end
@@ -61,18 +61,22 @@ module Calculus
     def parse
       exp = []
       stack = []
+      token = :none
       while true
-        case token = fetch_token
+        prev, token = token, fetch_token
+        case token
         when :open
           stack.push(token)
         when :close
           exp << stack.pop while operators.keys.include?(stack.last)
           stack.pop if stack.last == :open
         when :plus, :minus, :mul, :div, :exp, :sqrt, :eql
+          token = :uminus if prev && (prev == :none || prev != :close) && token == :minus
           exp << stack.pop while operators.keys.include?(stack.last) && operators[stack.last] >= operators[token]
           stack.push(token)
         when Numeric, String
           exp << token
+          token = nil
         when nil
           break
         else

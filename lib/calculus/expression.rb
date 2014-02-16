@@ -97,7 +97,7 @@ module Calculus
       @postfix_notation.each do |node|
         case node
         when Symbol
-          operation, right, left = node, stack.pop, stack.pop
+          operation, right, left = node, (node == :uminus ? nil : stack.pop), stack.pop
           stack.push(yield(operation, left, right, stack))
         when Numeric
           stack.push(node)
@@ -124,12 +124,13 @@ module Calculus
 
       traverse do |operation, left, right, stack|
         case operation
-        when :sqrt  then left ** (1.0 / right) # could cause some rounding errors
-        when :exp   then left ** right
-        when :plus  then left + right
-        when :minus then left - right
-        when :mul   then left * right
-        when :div   then left / right
+        when :uminus then -left
+        when :sqrt   then left ** (1.0 / right) # could cause some rounding errors
+        when :exp    then left ** right
+        when :plus   then left + right
+        when :minus  then left - right
+        when :mul    then left * right
+        when :div    then left / right
         end
       end
     end

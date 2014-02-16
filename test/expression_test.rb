@@ -103,6 +103,10 @@ class TestExpression < MiniTest::Unit::TestCase
     assert_equal Hash.new, exp.instance_variable_get("@variables")
   end
 
+  def test_that_it_handles_unary_minus
+    assert_equal 6, expression("-3 * -2").calculate
+  end
+
   protected
 
   def expression(input, substitutions = {})
