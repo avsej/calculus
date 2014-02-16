@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require 'calculus'
 
-class TestParser < MiniTest::Unit::TestCase
+class TestParser < MiniTest::Test
 
   def test_that_it_parses_simple_arithmetic
     assert_equal [1, 2, :plus], parse("1+2")

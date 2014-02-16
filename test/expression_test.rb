@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require 'calculus'
 
-class TestExpression < MiniTest::Unit::TestCase
+class TestExpression < MiniTest::Test
 
   def test_that_it_extract_variables_properly
     assert_equal ["x", "y"], expression("x + 2^x = y").variables
