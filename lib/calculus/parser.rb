@@ -46,7 +46,7 @@ module Calculus
 
     # Initialize parser with given source string. It could simple
     # (native expression like <tt>2 + 3 * (4 / 3)</tt>, but also in TeX
-    # style <tt>2 + 3 \cdot \frac{4}{3}.
+    # style <tt>2 + 3 \cdot \frac{4}{3}</tt>.
     def initialize(source)
       @operators = {:uminus => 4, :sqrt => 3, :exp => 3, :div => 2, :mul => 2, :plus => 1, :minus => 1, :eql => 0}
 
